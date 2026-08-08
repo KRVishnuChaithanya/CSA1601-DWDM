@@ -1,0 +1,27 @@
+library(readxl)
+
+diabetest1 <- read_excel("C:/Users/HP/Downloads/Question_19_LINEAR_REGRESSION.xlsx")
+
+# Convert columns to numeric
+diabetest1$Age <- as.numeric(diabetest1$Age)
+diabetest1$BloodPressure <- as.numeric(diabetest1$BloodPressure)
+
+# Remove invalid/empty rows
+diabetest1 <- na.omit(diabetest1)
+
+# Linear Regression
+Relation <- lm(BloodPressure ~ Age, data = diabetest1)
+
+# Display regression result
+print(Relation)
+
+# Plot
+plot(diabetest1$Age,
+     diabetest1$BloodPressure,
+     col = "green",
+     main = "Linear Regression Analysis",
+     xlab = "Age",
+     ylab = "Blood Pressure")
+
+# Add regression line
+abline(Relation)
