@@ -1,0 +1,26 @@
+library(readxl)
+
+diabetest1 <- read_excel("C:/Users/HP/Downloads/Question_20_MULTIPLE_REGRESSION.xlsx")
+
+# Convert columns to numeric
+diabetest1$Age <- as.numeric(diabetest1$Age)
+diabetest1$BloodPressure <- as.numeric(diabetest1$BloodPressure)
+diabetest1$Glucose <- as.numeric(diabetest1$Glucose)
+
+# Remove empty/invalid rows
+diabetest1 <- na.omit(diabetest1)
+
+# Multiple Regression
+Model <- lm(Age ~ BloodPressure + Glucose, data = diabetest1)
+
+# Display model
+print(Model)
+
+# Coefficients
+A <- coef(Model)[1]
+xBloodPressure <- coef(Model)[2]
+yGlucose <- coef(Model)[3]
+
+print(A)
+print(xBloodPressure)
+print(yGlucose)
